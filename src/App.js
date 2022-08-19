@@ -38,6 +38,10 @@ function App() {
 		}
 	};
 
+	const clear = () => {
+		fetchQuotes();
+	};
+
 	useEffect(() => {
 		fetchQuotes();
 	}, [fetchQuotes]);
@@ -60,7 +64,6 @@ function App() {
 			setCharacter(false);
 		}
 		setQuotes(result);
-		setCharacter(result[0].character);
 	};
 
 	return (
@@ -73,6 +76,8 @@ function App() {
 				/>
 			</div>
 			<Search
+				onClear={clear}
+				setCharacter={setCharacter}
 				onSearchQuotes={handleSearch}
 				loading={setIsLoading}
 				setError={setError}
@@ -81,10 +86,15 @@ function App() {
 			{!error && content}
 			{error && <h2>{error}</h2>}
 			{isLoading && <LoadingSpinner />}
-			<button className={styles.button} onClick={() => moreQuotes()}>
-				More quotes
-			</button>
-			<div ref={bottomRef} />
+			<div>
+				<button className={styles.button} onClick={() => moreQuotes()}>
+					More quotes
+				</button>
+				<button className={styles.button} onClick={() => fetchQuotes()}>
+					Another quote!
+				</button>
+				<div ref={bottomRef} />
+			</div>
 		</div>
 	);
 }

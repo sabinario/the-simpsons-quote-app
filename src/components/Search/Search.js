@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import fetchData from '../../utils/fetchData';
 
-function Search({ onSearchQuotes, loading, setError }) {
+function Search({ onSearchQuotes, loading, setError, setCharacter, onClear }) {
 	const inputRef = useRef();
 	const selectRef = useRef();
 
@@ -10,10 +10,6 @@ function Search({ onSearchQuotes, loading, setError }) {
 		e.preventDefault();
 		if (!inputRef.current?.value && !selectRef.current?.value) {
 			return;
-		}
-
-		if (!inputRef.current?.value && selectRef.current?.value) {
-			search('', selectRef.current?.value);
 		}
 
 		search(inputRef.current?.value, selectRef.current?.value);
@@ -25,8 +21,12 @@ function Search({ onSearchQuotes, loading, setError }) {
 			const results = await fetchData(
 				`${process.env.REACT_APP_API_URL}/search?amount=${amount}&name=${character}`
 			);
-			console.log('results: ', results);
 			onSearchQuotes(results);
+			if (inputRef.current?.value) {
+				setCharacter(results[0].character);
+			} else {
+				setCharacter('The Simpsons cast');
+			}
 		} catch (err) {
 			loading(false);
 			setError(err);
@@ -40,7 +40,7 @@ function Search({ onSearchQuotes, loading, setError }) {
 			<form
 				onSubmit={onSubmit}
 				style={{
-					width: '30%',
+					width: '35%',
 					marginBottom: '32px',
 					borderRadius: '8px',
 					height: '56px',
@@ -58,21 +58,52 @@ function Search({ onSearchQuotes, loading, setError }) {
 					id='character'
 					placeholder='Search a character'
 					style={{
-						width: '70%',
+						width: '60%',
 						padding: '16px',
 						borderRadius: '8px',
 						border: 'none',
 						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
 					}}
 				/>
-				<select name='amount' id='amount' ref={selectRef} defaultValue=''>
+				<select
+					name='amount'
+					id='amount'
+					ref={selectRef}
+					defaultValue=''
+					style={{
+						padding: '8px',
+						borderRadius: '8px',
+						border: 'none',
+						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
+					}}
+				>
 					<option value=''>Select</option>
 					<option value='5'>5</option>
 					<option value='10'>10</option>
 					<option value='15'>15</option>
 					<option value='20'>20</option>
 				</select>
-				<button type='submit'>Search</button>
+				<button
+					type='submit'
+					style={{
+						borderRadius: '8px',
+						border: 'none',
+						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
+					}}
+				>
+					Search
+				</button>
+				<button
+					type=''
+					onClick={onClear}
+					style={{
+						borderRadius: '8px',
+						border: 'none',
+						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
+					}}
+				>
+					Clear
+				</button>
 			</form>
 		</>
 	);
