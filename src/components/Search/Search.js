@@ -13,6 +13,7 @@ function Search({ onSearchQuotes, loading, setError, setCharacter, onClear }) {
 		}
 
 		search(inputRef.current?.value, selectRef.current?.value);
+		inputRef.current.value = selectRef.current.value = '';
 	};
 
 	const search = async (character, amount) => {
@@ -22,7 +23,7 @@ function Search({ onSearchQuotes, loading, setError, setCharacter, onClear }) {
 				`${process.env.REACT_APP_API_URL}/search?amount=${amount}&name=${character}`
 			);
 			onSearchQuotes(results);
-			if (inputRef.current?.value) {
+			if (character) {
 				setCharacter(results[0].character);
 			} else {
 				setCharacter('The Simpsons cast');
