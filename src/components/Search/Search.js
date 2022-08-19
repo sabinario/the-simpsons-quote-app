@@ -5,7 +5,7 @@ import fetchData from '../../utils/fetchData';
 
 function Search({
 	onSearchQuotes,
-	loading,
+	setLoading,
 	setError,
 	setCharacter,
 	onRefresh,
@@ -26,7 +26,7 @@ function Search({
 
 	const search = async (character, amount) => {
 		try {
-			loading(true);
+			setLoading(true);
 			const results = await fetchData(
 				`${process.env.REACT_APP_API_URL}/search?amount=${amount}&name=${character}`
 			);
@@ -37,10 +37,10 @@ function Search({
 				setCharacter('The Simpsons cast');
 			}
 		} catch (err) {
-			loading(false);
+			setLoading(false);
 			setError(err);
 		}
-		loading(false);
+		setLoading(false);
 	};
 
 	return (

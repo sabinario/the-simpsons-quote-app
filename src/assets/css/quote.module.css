@@ -3,15 +3,15 @@
 	display: flex;
 }
 
-.character--image {
+.quote--character__image {
 	width: 200px;
 	margin: 0 20px;
 }
 
-.direction--right {
+.character--imagedirection__right {
 	flex-direction: row;
 }
 
-.direction--left {
+.character--imagedirection__left {
 	flex-direction: row-reverse;
 }

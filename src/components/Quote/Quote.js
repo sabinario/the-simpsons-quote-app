@@ -4,19 +4,20 @@ import styles from '../../assets/css/quote.module.css';
 import BubbleText from '../ui/BubbleText';
 
 function Quote({ quote, image, character, characterDirection }) {
+	let imageDirection = `character--imagedirection__${characterDirection?.toLowerCase()}`;
+
 	return (
 		<article
-			className={[
-				styles['quote--container'],
-				characterDirection?.toLowerCase() === 'right'
-					? styles['direction--right']
-					: styles['direction--left'],
-			].join(' ')}
+			className={[styles['quote--container'], styles[imageDirection]].join(' ')}
 		>
 			<div>
 				<BubbleText text={quote} direction={characterDirection} />
 			</div>
-			<img src={image} alt={character} className={styles['character--image']} />
+			<img
+				src={image}
+				alt={character}
+				className={styles['quote--character__image']}
+			/>
 		</article>
 	);
 }

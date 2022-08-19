@@ -77,13 +77,17 @@ function App() {
 			</div>
 			<Search
 				onRefresh={refresh}
-				setCharacter={setCharacter}
 				onSearchQuotes={handleSearch}
-				loading={setIsLoading}
+				setCharacter={setCharacter}
+				setLoading={setIsLoading}
 				setError={setError}
 			/>
-			{!error && <h2>Amazing quotes by... {character}!</h2>}
-			{!error && content}
+			{!error && (
+				<>
+					<h2>Amazing quotes by... {character}!</h2>
+					{content}
+				</>
+			)}
 			{error && <h2>{error}</h2>}
 			{isLoading && <LoadingSpinner />}
 			<div>
