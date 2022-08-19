@@ -95,7 +95,7 @@ function Search({ onSearchQuotes, loading, setError, setCharacter, onClear }) {
 				</button>
 				<button
 					type=''
-					onClick={onClear}
+					onClick={() => onClear()}
 					style={{
 						borderRadius: '8px',
 						border: 'none',
