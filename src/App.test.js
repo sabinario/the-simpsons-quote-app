@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-	render,
-	screen,
-	waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import App from './App';
@@ -26,8 +22,8 @@ describe('Render quote', () => {
 		});
 		render(<App />);
 
-		const spinner = await screen.findByTestId('spinner');
-		await waitForElementToBeRemoved(() => spinner);
+		const spinner = await screen.findByText(/loading/i);
+		expect(spinner).toBeInTheDocument();
 
 		const quoteEl = await screen.findAllByRole('article');
 		expect(quoteEl).toHaveLength(1);

@@ -19,11 +19,11 @@
 	margin: 32px 0;
 	border-radius: 12px;
 	border: 0;
-	background-color: #fed439;
+	background-color: #ebe719;
 	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 	transition: all ease 0.2s;
 }
 
 .button:hover {
-	background-color: #cba413;
+	background-color: #cfcc27;
 }
