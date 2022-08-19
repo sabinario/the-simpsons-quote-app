@@ -2,13 +2,20 @@ import React, { useRef } from 'react';
 
 import fetchData from '../../utils/fetchData';
 
-function Search({ onSearchQuotes, loading, setError, setCharacter, onClear }) {
+function Search({
+	onSearchQuotes,
+	loading,
+	setError,
+	setCharacter,
+	onRefresh,
+}) {
 	const inputRef = useRef();
 	const selectRef = useRef();
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		if (!inputRef.current?.value && !selectRef.current?.value) {
+			onRefresh();
 			return;
 		}
 
@@ -96,7 +103,7 @@ function Search({ onSearchQuotes, loading, setError, setCharacter, onClear }) {
 				</button>
 				<button
 					type=''
-					onClick={() => onClear()}
+					onClick={() => onRefresh()}
 					style={{
 						borderRadius: '8px',
 						border: 'none',

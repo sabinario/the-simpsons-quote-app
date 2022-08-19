@@ -38,7 +38,7 @@ function App() {
 		}
 	};
 
-	const clear = () => {
+	const refresh = () => {
 		fetchQuotes();
 	};
 
@@ -76,7 +76,7 @@ function App() {
 				/>
 			</div>
 			<Search
-				onClear={clear}
+				onRefresh={refresh}
 				setCharacter={setCharacter}
 				onSearchQuotes={handleSearch}
 				loading={setIsLoading}

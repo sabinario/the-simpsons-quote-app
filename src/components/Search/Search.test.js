@@ -21,4 +21,24 @@ describe('Render search bar', () => {
 
 		expect(searchInput).toHaveValue('homer');
 	});
+	test('check if the input is empty after sending form', async () => {
+		render(<Search loading={jest.fn()} />);
+
+		const searchInput = screen.getByRole('textbox');
+		const selectAmount = screen.getByRole('combobox');
+		const searchButton = screen.getByRole('button', { name: 'Search' });
+		userEvent.clear(searchInput);
+		userEvent.type(searchInput, 'homer');
+
+		userEvent.selectOptions(
+			selectAmount,
+			screen.getByRole('option', { name: '5' })
+		);
+		expect(searchInput).toHaveValue('homer');
+
+		userEvent.click(searchButton);
+
+		expect(searchInput).toHaveValue('');
+		expect(selectAmount).toHaveValue('');
+	});
 });
