@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 
+import styles from '../../assets/css/search.module.css';
 import fetchData from '../../utils/fetchData';
 
 function Search({
@@ -45,45 +46,21 @@ function Search({
 	return (
 		<>
 			<h2>Search a character to get its famous quotes!</h2>
-			<form
-				onSubmit={onSubmit}
-				style={{
-					width: '35%',
-					marginBottom: '32px',
-					borderRadius: '8px',
-					height: '56px',
-					display: 'flex',
-					justifyContent: 'space-between',
-					padding: '12px 16px',
-					backgroundColor: '#ebe719',
-					boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
-				}}
-			>
+			<form onSubmit={onSubmit} className={styles.form}>
 				<input
 					ref={inputRef}
 					type='text'
 					name='character'
 					id='character'
 					placeholder='Search a character'
-					style={{
-						width: '60%',
-						padding: '16px',
-						borderRadius: '8px',
-						border: 'none',
-						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
-					}}
+					className={styles['form--input']}
 				/>
 				<select
 					name='amount'
 					id='amount'
 					ref={selectRef}
 					defaultValue=''
-					style={{
-						padding: '8px',
-						borderRadius: '8px',
-						border: 'none',
-						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
-					}}
+					className={styles['input--select']}
 				>
 					<option value=''>Select</option>
 					<option value='5'>5</option>
@@ -91,24 +68,13 @@ function Search({
 					<option value='15'>15</option>
 					<option value='20'>20</option>
 				</select>
-				<button
-					type='submit'
-					style={{
-						borderRadius: '8px',
-						border: 'none',
-						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
-					}}
-				>
+				<button type='submit' className={styles['input--button']}>
 					Search
 				</button>
 				<button
 					type=''
 					onClick={() => onRefresh()}
-					style={{
-						borderRadius: '8px',
-						border: 'none',
-						boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1)',
-					}}
+					className={styles['input--button']}
 				>
 					Clear
 				</button>

@@ -1,17 +1,17 @@
-.main {
+.quote--container {
 	padding: 16px;
 	display: flex;
 }
 
-.character-image {
+.character--image {
 	width: 200px;
 	margin: 0 20px;
 }
 
-.direction-right {
+.direction--right {
 	flex-direction: row;
 }
 
-.direction-left {
+.direction--left {
 	flex-direction: row-reverse;
 }

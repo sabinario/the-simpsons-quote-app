@@ -1,0 +1,32 @@
+.form {
+	width: 35%;
+	margin-bottom: 32px;
+	border-radius: 8px;
+	height: 56px;
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 16px;
+	background-color: #ebe719;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.form--input {
+	width: 60%;
+	padding: 16px;
+	border-radius: 8px;
+	border: none;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.input--select {
+	padding: 8px;
+	border-radius: 8px;
+	border: none;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.input--button {
+	border-radius: 8px;
+	border: none;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

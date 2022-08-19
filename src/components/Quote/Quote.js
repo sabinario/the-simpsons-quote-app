@@ -7,16 +7,16 @@ function Quote({ quote, image, character, characterDirection }) {
 	return (
 		<article
 			className={[
-				styles.main,
+				styles['quote--container'],
 				characterDirection?.toLowerCase() === 'right'
-					? styles['direction-right']
-					: styles['direction-left'],
+					? styles['direction--right']
+					: styles['direction--left'],
 			].join(' ')}
 		>
 			<div>
 				<BubbleText text={quote} direction={characterDirection} />
 			</div>
-			<img src={image} alt={character} className={styles['character-image']} />
+			<img src={image} alt={character} className={styles['character--image']} />
 		</article>
 	);
 }
