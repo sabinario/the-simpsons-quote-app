@@ -1,43 +1,79 @@
-import './App.css';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useEffect, useState } from 'react';
-
-import logo from './logo.svg';
+import styles from './assets/css/app.module.css';
+import simpsonsLogo from './assets/images/thesimpsons.png';
+import Quote from './components/Quote/Quote';
+import LoadingSpinner from './components/ui/LoadingSpinner';
 
 function App() {
+	const bottomRef = useRef(null);
 	const [quotes, setQuotes] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const fetchQuotes = async () => {
+	const fetchData = async () => {
+		let quote;
+		await fetch(process.env.REACT_APP_API_URL)
+			.then((response) => response.json())
+			.then((data) => {
+				quote = data;
+			});
+		return quote;
+	};
+
+	const fetchQuotes = useCallback(async () => {
 		try {
-			const response = await fetch(process.env.REACT_APP_API_URL);
-			const data = await response.json();
-			setQuotes(data);
-		} catch (error) {
-			console.error(error);
+			setIsLoading(true);
+			const quote = await fetchData();
+			setQuotes(quote);
+			setIsLoading(false);
+		} catch (err) {
+			throw new Error(err);
+		}
+	}, []);
+
+	const moreQuotes = async () => {
+		try {
+			setIsLoading(true);
+			const quote = await fetchData();
+			setQuotes((prev) => [...prev, ...quote]);
+			setIsLoading(false);
+		} catch (err) {
+			throw new Error(err);
 		}
 	};
 
 	useEffect(() => {
 		fetchQuotes();
-	}, []);
+	}, [fetchQuotes]);
 
-	console.log(quotes);
+	let content = quotes?.map((qt) => {
+		const { quote, image, character, characterDirection } = qt;
+		return (
+			<Quote
+				key={qt.id}
+				quote={quote}
+				image={image}
+				character={character}
+				characterDirection={characterDirection}
+			/>
+		);
+	});
+
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className='App-link'
-					href='https://reactjs.org'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					Learn React
-				</a>
-			</header>
+		<div className={styles.app}>
+			<div>
+				<img
+					src={simpsonsLogo}
+					alt='the simpsons logo'
+					className={styles.logo}
+				/>
+			</div>
+			{content}
+			{isLoading && <LoadingSpinner />}
+			<button className={styles.button} onClick={() => moreQuotes()}>
+				More quotes
+			</button>
+			<div ref={bottomRef} />
 		</div>
 	);
 }

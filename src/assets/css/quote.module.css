@@ -1,0 +1,16 @@
+.main {
+	padding: 16px;
+	display: flex;
+}
+
+.character-image {
+	width: 250px;
+}
+
+.direction-right {
+	flex-direction: row;
+}
+
+.direction-left {
+	flex-direction: row-reverse;
+}

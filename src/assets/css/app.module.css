@@ -1,0 +1,29 @@
+.app {
+	min-height: 100vh;
+	background-color: #709ae1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 24px;
+}
+
+.logo {
+	width: 500px;
+	margin-bottom: 32px;
+}
+
+.button {
+	height: 32px;
+	padding: 6px 12px;
+	margin: 32px 0;
+	border-radius: 12px;
+	border: 0;
+	background-color: #fed439;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+	transition: all ease 0.2s;
+}
+
+.button:hover {
+	background-color: #cba413;
+}
